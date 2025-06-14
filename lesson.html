@@ -9,13 +9,17 @@
 <body>
     <header>
     <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="courses.html">Courses</a></li>
-        </ul>
+        <div class="nav-container container">
+            <a href="index.html" class="logo">JS Learn</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+            </ul>
+        </div>
     </nav>
     </header>
     <main id="lesson-container">
+    <div class="container">
         <h1 id="lesson-title"></h1>
         <p id="lesson-description"></p>
         <div id="lesson-content"></div>
@@ -28,6 +32,7 @@
                 <!-- Quiz options will be populated here -->
             </div>
         </div>
+    </div>
     </main>
     <footer>
         <p>&copy; 2024 JS Learning Hub</p>

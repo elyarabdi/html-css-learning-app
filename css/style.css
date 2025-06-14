@@ -1,170 +1,689 @@
-/* Basic Reset */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+/*
+    Color Palette:
+    - Primary: #007bff (Vibrant Blue)
+    - Secondary/Accent: #6c757d (Cool Gray)
+    - Text: #343a40 (Dark Gray)
+    - Light Text: #f8f9fa (Very Light Gray / Off-White)
+    - Background: #ffffff (White)
+    - Light Background: #f8f9fa (Off-White / Very Light Gray)
+    - Border: #dee2e6 (Light Gray)
+    - Success: #28a745 (Green) - for CTA, positive feedback
+    - Info: #17a2b8 (Teal)
+    - Warning: #ffc107 (Yellow)
+    - Danger: #dc3545 (Red)
+*/
+
+/* Basic Reset - Keeping this as it's good practice */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Global Styles */
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f4;
-    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.7;
+    color: #343a40; /* Dark Gray text */
+    background-color: #f8f9fa; /* Off-White background */
+    padding: 0; /* Remove previous padding, handle spacing with containers */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-header, footer {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem 0;
-    text-align: center;
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto; /* Center container */
+    padding: 20px 0; /* Add vertical padding */
 }
 
+/* Make main take up available space */
 main {
-    padding: 20px;
-    background-color: #fff;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    flex-grow: 1;
+    padding: 30px 0; /* Increased vertical padding, horizontal handled by .container if needed */
+    background-color: #ffffff; /* White background for main content area */
+    /* margin-top: 0; remove previous margin */
+    /* margin-bottom: 0; remove previous margin */
 }
 
-h1, h2, h3 {
-    margin-bottom: 10px;
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1rem; /* Consistent bottom margin for headings */
+    font-weight: 700; /* Bolder headings */
+    line-height: 1.3;
+    color: #007bff; /* Primary color for headings */
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+
+p {
+    margin-bottom: 1rem; /* Consistent bottom margin for paragraphs */
+}
+
+a {
+    color: #007bff; /* Primary color for links */
+    text-decoration: none; /* Remove underline by default */
+}
+
+a:hover {
+    color: #0056b3; /* Darker blue on hover */
+    text-decoration: underline; /* Add underline on hover for clarity */
 }
 
 pre {
-    background-color: #eee;
-    padding: 10px;
+    background-color: #e9ecef; /* Lighter gray for code blocks */
+    padding: 15px; /* Increased padding */
     border-radius: 5px;
     overflow-x: auto;
+    border: 1px solid #dee2e6; /* Light border */
+    margin-bottom: 1rem; /* Consistent margin */
 }
 
 code {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; /* More modern mono font stack */
+    font-size: 0.95em;
+    color: #343a40; /* Dark text for code */
 }
 
+/* Removing previous specific styles for header, footer, main that might conflict */
+/* Previous body padding: 20px; is removed and handled by .container or specific sections */
+/* Previous main padding: 20px; background-color: #fff; margin-top: 10px; margin-bottom: 10px; */
+/* Previous header, footer padding: 1rem 0; */
+
+/* Ensure HTML and Body take full height for sticky footer */
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+/* Original component styles - to be reviewed and updated in subsequent steps */
+/* It's better to re-evaluate these styles against the new global styles in their respective steps */
+
+
 /* Navigation Bar */
+header {
+    background-color: #343a40; /* Dark Gray from palette */
+    color: #f8f9fa; /* Light Text from palette */
+    padding: 0; /* Header itself has no padding; nav-container will handle it */
+    position: sticky; /* Sticky navigation bar */
+    top: 0;
+    z-index: 1000; /* Ensure it stays on top */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.nav-container { /* This class is now inside <nav> or wraps nav content */
+    display: flex;
+    justify-content: space-between; /* Pushes logo to left and nav links to right */
+    align-items: center;
+    /* Uses the .container class for width and centering, so no specific width/margin here */
+    padding: 0.8rem 0; /* Vertical padding for the nav items */
+}
+
+.logo {
+    font-size: 1.75em; /* Slightly adjusted size */
+    font-weight: 700; /* Bold */
+    color: #f8f9fa; /* Light text */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.logo:hover {
+    color: #007bff; /* Primary color on hover */
+    text-decoration: none;
+}
+
 nav {
-    background-color: #444;
-    padding: 1rem 0;
-    text-align: center;
+    /* Nav tag itself doesn't need much styling if nav-container handles layout */
+    /* background-color, padding, text-align, border-bottom are removed as header or nav-container handles them */
+    width: auto; /* Allow nav to fit its content (the ul) */
 }
 
 nav ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    display: inline-block; /* Aligns list items in a row */
+    display: flex; /* Align list items in a row */
+    align-items: center;
 }
 
 nav ul li {
-    display: inline; /* Display list items horizontally */
-    margin-right: 20px;
+    display: inline; /* Should be redundant due to flex on ul */
+    margin-left: 20px; /* Space between navigation links */
 }
 
-nav ul li:last-child {
-    margin-right: 0;
+nav ul li:first-child {
+    margin-left: 0; /* No left margin for the first link if it's directly after logo */
 }
 
 nav ul li a {
-    color: #fff;
+    color: #e9ecef; /* Slightly dimmer white for non-active links */
     text-decoration: none;
-    font-weight: bold;
-    padding: 5px 10px;
+    font-weight: 500; /* Regular weight for nav links */
+    padding: 8px 15px; /* Padding for clickable area */
     border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-size: 1em;
 }
 
-nav ul li a:hover {
-    background-color: #555;
+nav ul li a:hover,
+nav ul li a.active { /* .active class can be added by JS later */
+    background-color: #007bff; /* Primary color for hover/active state */
+    color: #ffffff; /* Bright white text */
+    text-decoration: none;
 }
 
-/* Basic Responsive Nav: Stack links on smaller screens */
-@media (max-width: 600px) {
-    nav ul li {
-        display: block;
-        margin-right: 0;
-        margin-bottom: 10px;
+/* Responsive Navigation Styles */
+.menu-toggle { /* Placeholder for future hamburger icon */
+    display: none;
+    font-size: 1.8em; /* Larger icon */
+    color: #f8f9fa;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column; /* Stack logo and nav menu */
+        align-items: flex-start; /* Align items to the start (left) */
+        padding: 0.8rem 15px; /* Add horizontal padding for mobile inside container */
     }
+
+    .logo {
+        margin-bottom: 10px; /* Space between logo and nav links when stacked */
+    }
+
+    nav {
+        width: 100%; /* Nav takes full width to contain the stacked ul */
+    }
+
+    nav ul {
+        flex-direction: column; /* Stack nav links vertically */
+        width: 100%; /* Make ul take full width */
+        align-items: flex-start; /* Align links to the start (left) */
+    }
+
+    nav ul li {
+        display: block; /* Make list items block elements */
+        margin-left: 0;
+        margin-bottom: 8px; /* Space between stacked links */
+        width: 100%; /* Full width list items */
+    }
+
     nav ul li:last-child {
         margin-bottom: 0;
     }
+
+    nav ul li a {
+        display: block; /* Make links fill their li container */
+        padding: 10px 0; /* Adjust padding for vertical display (no horizontal needed if text-align left) */
+        text-align: left; /* Align text to the left */
+        width: 100%;
+    }
+
+    /* Uncomment and style .menu-toggle when JS for hamburger menu is implemented
+    .menu-toggle {
+        display: block;
+        position: absolute; // Example positioning
+        top: 15px;
+        right: 15px;
+    }
+    nav ul { // Initially hide the menu on mobile, to be shown by JS
+        display: none;
+    }
+    nav ul.open {
+        display: flex; // Or block, depending on flex-direction
+    }
+    */
 }
 
-/* CTA Button */
+/* Hero Section */
+.hero-section {
+    background-color: #007bff; /* Primary color background */
+    color: #ffffff; /* White text */
+    padding: 60px 20px; /* Generous padding */
+    text-align: center;
+    border-radius: 8px; /* Rounded corners */
+    margin-bottom: 30px; /* Space below hero */
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); /* Subtle shadow related to primary color */
+}
+
+.hero-section h1 {
+    color: #ffffff; /* White heading text */
+    font-size: 3rem; /* Larger font size for hero heading */
+    margin-bottom: 15px;
+    font-weight: 700; /* Bold */
+    animation: fadeInDown 0.8s ease-out; /* Simple animation */
+}
+
+.hero-section p {
+    color: #f8f9fa; /* Light white text for paragraph */
+    font-size: 1.25rem; /* Larger font size for intro text */
+    margin-bottom: 30px;
+    line-height: 1.7;
+    animation: fadeInUp 0.8s ease-out 0.3s; /* Simple animation, delayed */
+    animation-fill-mode: backwards; /* Ensure it starts from invisible if delayed */
+}
+
+/* CTA Button - Replacing previous .cta-button styles */
 .cta-button {
     display: inline-block;
-    background-color: #5cb85c; /* A green color */
-    color: white;
-    padding: 10px 20px;
+    background-color: #28a745; /* Success Green, stands out on blue */
+    /* background-color: #ffc107; /* Yellow could also work for CTA */
+    color: #ffffff; /* White text */
+    padding: 15px 35px; /* Larger padding */
     text-align: center;
     text-decoration: none;
-    border-radius: 5px;
-    font-size: 1.1em;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
+    border-radius: 50px; /* Pill shape */
+    font-size: 1.2rem; /* Larger font size */
+    font-weight: bold;
+    margin-top: 10px; /* Adjusted margin */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    border: none; /* Remove any default border */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    animation: fadeInUp 0.8s ease-out 0.6s; /* Simple animation, delayed */
+    animation-fill-mode: backwards; /* Ensure it starts from invisible if delayed */
 }
 
-.cta-button:hover {
-    background-color: #4cae4c; /* Darker green on hover */
+.cta-button:hover, .cta-button:focus { /* Added :focus for accessibility */
+    background-color: #218838; /* Darker Green */
+    color: #ffffff; /* Ensure text color remains white */
+    text-decoration: none; /* Remove underline from global 'a:hover' */
+    transform: translateY(-3px) scale(1.05); /* Lift and slightly scale effect */
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.4); /* Shadow related to button color */
+}
+
+/* Keyframe animations for hero elements */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Course List Styling */
+.course-list-container { /* Assuming this ID is on the div directly inside .container in courses.html */
+    /* No specific styles needed here if .container handles padding/width */
+}
+
 .course-list {
-    list-style-type: none; /* Removes default bullets */
-    padding: 0;
+    list-style-type: none;
+    padding: 0; /* Remove default padding */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Slightly smaller min size for more flexibility */
+    gap: 25px; /* Increased gap */
+    margin-top: 20px; /* Add some space above the course list */
 }
 
 .course-item {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    background-color: #ffffff; /* White background for cards */
+    border: 1px solid #e0e0e0; /* Softer border color */
+    border-radius: 8px; /* Consistent rounded corners */
+    padding: 0; /* Remove padding from item itself, use internal elements for spacing */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07); /* Softer initial shadow */
+    display: flex; /* Use flexbox for internal layout */
+    flex-direction: column; /* Stack content vertically */
+    overflow: hidden; /* Ensure content respects border-radius */
 }
 
 .course-item:hover {
-    background-color: #e9e9e9;
+    transform: translateY(-6px); /* Slightly more lift */
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12); /* More pronounced shadow on hover */
 }
 
-.course-item a {
+.course-item a { /* The link wrapping the content */
     text-decoration: none;
-    color: inherit; /* Inherit text color from parent */
-    display: block; /* Make the whole item clickable */
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Make link take full height of card */
 }
 
-.course-item h3 {
+.course-item-image-placeholder { /* Optional: if we add images later */
+    height: 150px;
+    background-color: #007bff; /* Primary color placeholder */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2em;
+    /* background-image: url('path/to/default-image.jpg'); */
+    /* background-size: cover; */
+    /* background-position: center; */
+}
+
+.course-item-content {
+    padding: 20px; /* Padding for text content */
+    flex-grow: 1; /* Allows this section to take available space */
+    display: flex;
+    flex-direction: column;
+}
+
+.course-item h3 { /* Title of the course */
     margin-top: 0;
-    color: #337ab7; /* A blue color for titles */
+    color: #0056b3; /* Darker primary blue for titles for contrast on white */
+    font-size: 1.4rem; /* Adjusted size */
+    margin-bottom: 10px; /* Space below title */
+    line-height: 1.4;
 }
 
-.course-item p {
+.course-item p { /* Description of the course */
+    font-size: 0.9rem; /* Slightly smaller for description */
+    color: #555; /* Darker gray for better readability */
+    line-height: 1.6;
+    margin-bottom: 15px; /* Space below description */
+    flex-grow: 1; /* Allows description to push footer down */
+}
+
+.course-item-footer { /* Optional: for "Read more" or tags */
+    padding: 15px 20px;
+    border-top: 1px solid #e0e0e0;
+    background-color: #f9f9f9; /* Slightly off-white footer for card */
+    text-align: right;
+}
+
+.course-item-footer .read-more-link {
+    color: #007bff;
+    font-weight: bold;
     font-size: 0.9em;
-    color: #555;
+}
+.course-item-footer .read-more-link:hover {
+    text-decoration: underline;
 }
 
-/* Quiz Options Styling */
+/* Lesson Page Specific Styling */
+#lesson-container { /* ID of the main content wrapper on lesson.html */
+    padding-top: 20px; /* Add some space at the top of the lesson content */
+    max-width: 900px; /* Constrain width for better readability of text */
+    margin: 0 auto; /* Center the lesson content container */
+}
+
+#lesson-title { /* Already styled by global h1, but can add specifics */
+    font-size: 2.8rem; /* Slightly larger for main lesson title */
+    margin-bottom: 10px;
+    color: #343a40; /* Darker color for lesson title for more emphasis */
+}
+
+#lesson-description { /* The short description below the title */
+    font-size: 1.15rem;
+    color: #555;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+#lesson-content h2,
+#lesson-content h3,
+#lesson-content h4 { /* Headings within the lesson content itself */
+    color: #343a40; /* Darker color for subheadings */
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #007bff; /* Primary color underline for subheadings */
+    padding-bottom: 5px;
+}
+#lesson-content h2 { font-size: 1.8rem; }
+#lesson-content h3 { font-size: 1.5rem; }
+#lesson-content h4 { font-size: 1.2rem; }
+
+
+#lesson-content p,
+#lesson-content ul,
+#lesson-content li {
+    font-size: 1.05rem; /* Slightly larger base font for content */
+    line-height: 1.8; /* More line spacing for readability */
+    color: #333;
+}
+
+#lesson-content ul {
+    list-style-position: outside;
+    padding-left: 25px; /* Indent lists */
+    margin-bottom: 1rem;
+}
+
+#lesson-content ul li {
+    margin-bottom: 0.5rem;
+}
+
+#lesson-content strong {
+    color: #0056b3; /* Darker blue for emphasis */
+}
+
+/* Enhanced Code Block Styling */
+/* Global <pre> and <code> are already defined. We enhance them here or can make them specific. */
+/* For instance, if we want lesson code examples to be different: */
+#lesson-container pre { /* Target pre within lesson container for specificity */
+    background-color: #2d2d2d; /* Dark background for code blocks */
+    color: #f8f8f2; /* Light text for dark background */
+    border: 1px solid #444; /* Border for dark theme */
+    padding: 20px; /* More padding */
+    border-radius: 6px;
+    font-size: 0.95em; /* Standard code font size */
+    position: relative; /* For potential future "copy" button */
+    margin: 20px 0; /* More vertical margin */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+#lesson-container pre code { /* Target code within the lesson's pre */
+    color: inherit; /* Inherit light text color from pre */
+    background: none; /* No specific background for code tag itself if pre has it */
+    padding: 0; /* No padding for code tag itself */
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+}
+
+/* Optional: Add a copy button placeholder style */
+#lesson-container pre .copy-code-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+#lesson-container pre:hover .copy-code-button {
+    opacity: 1;
+}
+
+
+/* Quiz Section Styling */
+#quiz-container {
+    margin-top: 40px; /* More space above quiz */
+    padding: 25px;
+    background-color: #f8f9fa; /* Light background for quiz section */
+    border-radius: 8px;
+    border: 1px solid #dee2e6; /* Light border */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+#quiz-question {
+    font-size: 1.3rem;
+    font-weight: 600; /* Bolder question */
+    color: #343a40; /* Dark text */
+    margin-bottom: 20px; /* Space below question */
+}
+
+/* Replacing existing .quiz-options-list and .quiz-option-button styles */
 .quiz-options-list {
     list-style-type: none;
     padding: 0;
-    margin-top: 10px;
 }
 
 .quiz-options-list li {
-    margin-bottom: 8px;
+    margin-bottom: 12px; /* Increased spacing */
 }
 
 .quiz-option-button {
     display: block;
     width: 100%;
-    padding: 10px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 15px; /* More padding */
+    background-color: #ffffff; /* White background for buttons */
+    border: 1px solid #ced4da; /* Standard border */
+    border-radius: 6px; /* Slightly more rounded */
     text-align: left;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+    color: #495057; /* Default text color */
+    font-size: 1.05em; /* Slightly larger font */
+    line-height: 1.5;
 }
 
 .quiz-option-button:hover {
-    background-color: #e0e0e0;
+    background-color: #e9ecef; /* Light gray hover */
+    border-color: #adb5bd; /* Darker border on hover */
+    color: #007bff; /* Primary color text on hover */
+}
+
+.quiz-option-button:active { /* When button is clicked */
+    transform: translateY(1px); /* Slight press down effect */
+    background-color: #dde2e6;
+}
+
+/* Styles for when an option is selected (requires JS to add class) */
+.quiz-option-button.selected {
+    background-color: #007bff;
+    color: #ffffff;
+    border-color: #0056b3;
+}
+
+.quiz-option-button.correct { /* Requires JS to add class after checking */
+    background-color: #28a745; /* Green for correct */
+    color: #ffffff;
+    border-color: #1e7e34;
+}
+
+.quiz-option-button.incorrect { /* Requires JS to add class after checking */
+    background-color: #dc3545; /* Red for incorrect */
+    color: #ffffff;
+    border-color: #b21f2d;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px); /* Optional: slight upward movement */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply fade-in to main content areas */
+/* We can apply this to the .container within main, or to main itself.
+   Applying to .container might be better to avoid affecting full-width backgrounds if main has one.
+   The hero section already has its own animations.
+*/
+
+main > .container { /* Target .container that is a direct child of main */
+    animation: fadeIn 0.7s ease-out forwards;
+    /* 'forwards' ensures it stays at opacity: 1 after animation */
+}
+
+/* If we want to exclude hero section from this generic main container fade-in,
+   because it has its own more specific animations, we can do this:
+   main > .container:not(.hero-section-container-if-we-had-one)
+   However, our hero-section is inside the .container.
+   The hero-section animations are on its children (h1, p, button).
+   So, the container fading in, and then its children animating within it, should be acceptable.
+   If there's a clash (e.g. double fade), we might need to be more specific.
+*/
+
+/* Optional: Add subtle transitions to links or buttons if not already present globally */
+/* Global 'a' already has color transition. Buttons also have transitions. */
+/* This step is more about page load/section animations. */
+
+/* Example of a subtle hover scale effect for interactive elements (if needed) */
+/*
+.interactive-scale:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out;
+}
+*/
+
+/* Footer Update */
+footer {
+    background-color: #2c3034; /* Slightly darker than header for differentiation */
+    color: #adb5bd; /* Softer text color for footer */
+    padding: 2rem 0; /* Generous padding */
+    text-align: center;
+    font-size: 0.9em; /* Slightly smaller font size */
+    border-top: 3px solid #007bff; /* Primary color accent top border */
+    margin-top: auto; /* Pushes footer to bottom if content is short (flexbox already helps) */
+}
+
+footer p {
+    margin-bottom: 0.5rem; /* Adjust margin for paragraphs in footer */
+    line-height: 1.6;
+}
+
+footer a {
+    color: #0096ff; /* Brighter blue for links in footer for visibility */
+    text-decoration: none; /* No underline by default */
+}
+
+footer a:hover {
+    color: #f8f9fa; /* Light text on hover */
+    text-decoration: underline;
+}
+
+/* Optional: Footer links list */
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+}
+
+.footer-links li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.footer-links li a {
+    color: #adb5bd; /* Softer link color for less emphasis */
+}
+.footer-links li a:hover {
+    color: #007bff; /* Primary color on hover */
+}
+
+/* Optional: Social media icons styling placeholder */
+.social-icons {
+    margin-top: 1rem;
+}
+
+.social-icons a {
+    color: #adb5bd;
+    margin: 0 8px;
+    font-size: 1.4em; /* Larger for icons */
+    transition: color 0.2s ease;
+}
+
+.social-icons a:hover {
+    color: #007bff; /* Primary color on hover */
+    text-decoration: none;
 }
